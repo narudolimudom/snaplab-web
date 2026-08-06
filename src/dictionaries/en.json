@@ -1,0 +1,232 @@
+{
+  "common": {
+    "home": "Home",
+    "previousPage": "Previous",
+    "nextPage": "Next",
+    "noProducts": "No products yet",
+    "noImage": "No image yet",
+    "subtotal": "Subtotal",
+    "shippingFee": "Shipping fee",
+    "free": "Free",
+    "total": "Total",
+    "decrease": "Decrease quantity",
+    "increase": "Increase quantity",
+    "remove": "Remove",
+    "delete": "Delete",
+    "saving": "Saving...",
+    "uploading": "Uploading...",
+    "continueShopping": "Continue shopping",
+    "addNewAddress": "Add new address",
+    "defaultAddress": "Default address",
+    "orderSummary": "Order summary",
+    "paymentNote": "Pay by bank transfer or PromptPay, then attach a payment slip for verification",
+    "freeShippingBanner": "Free shipping nationwide on orders over ฿2,000",
+    "tradeIn": "Trade-in"
+  },
+  "nav": {
+    "contactPhone": "Call us 02-114-7788",
+    "searchPlaceholder": "Search for cameras, lenses, or models...",
+    "searchAriaLabel": "Search products",
+    "searchButton": "Search",
+    "cart": "Cart",
+    "login": "Sign in"
+  },
+  "home": {
+    "heroBadge": "SNAPLAB",
+    "heroTitle": "Quality cameras and lenses, with full after-sales service",
+    "heroSubtitle": "Authentic products with 2-year Thailand warranty and expert technician support",
+    "shopAll": "Shop all products",
+    "categoriesTitle": "Categories",
+    "newArrivals": "New arrivals",
+    "viewAll": "View all →",
+    "services": [
+      {
+        "title": "Genuine products, Thailand warranty",
+        "desc": "Every item is authentic, with a full Thailand warranty card and tax invoice"
+      },
+      {
+        "title": "Nationwide delivery",
+        "desc": "Free shipping nationwide on orders over ฿2,000, delivered quickly via trusted couriers"
+      },
+      {
+        "title": "Pay by bank transfer",
+        "desc": "Transfer via bank or PromptPay, then attach a payment slip to confirm instantly"
+      },
+      {
+        "title": "Slips verified by our team",
+        "desc": "The SnapLab team reviews and confirms your order within 1 business day"
+      }
+    ]
+  },
+  "products": {
+    "allProducts": "All products",
+    "resultCount": "{count} products found",
+    "categoryLabel": "Category",
+    "allCategoryOption": "All",
+    "priceRange": "Price range",
+    "minPricePlaceholder": "Min",
+    "maxPricePlaceholder": "Max",
+    "filterButton": "Filter",
+    "sortBy": "Sort by",
+    "sortNewest": "Newest",
+    "sortPriceAsc": "Price: low to high",
+    "sortPriceDesc": "Price: high to low",
+    "noResults": "No products found"
+  },
+  "product": {
+    "specsTitle": "Specifications",
+    "descriptionTitle": "Product details",
+    "selectVariant": "Select an option",
+    "outOfStock": "Out of stock",
+    "outOfStockSuffix": " (out of stock)",
+    "inStock": "{count} in stock",
+    "addToCart": "Add to cart",
+    "addingToCart": "Adding...",
+    "addedToCart": "Added to cart",
+    "trustWarranty": "Authentic, 2-year Thailand warranty",
+    "reviewsTitle": "Customer reviews",
+    "reviewsSampleNote": "(sample reviews)",
+    "reviews": [
+      {
+        "name": "SnapLab Customer",
+        "rating": 5,
+        "text": "Exactly as described, well packed, fast shipping. Staff gave great advice on how to use it."
+      },
+      {
+        "name": "SnapLab Customer",
+        "rating": 5,
+        "text": "Great quality for the price. The Thailand warranty gives peace of mind for any future service."
+      },
+      {
+        "name": "SnapLab Customer",
+        "rating": 4,
+        "text": "Overall very happy. Would love to see more color options in the future."
+      }
+    ]
+  },
+  "cart": {
+    "title": "Shopping cart",
+    "emptyTitle": "Your cart is empty",
+    "emptyDesc": "Pick a camera or lens you like, then come back to check out",
+    "browseProducts": "Browse products",
+    "unitPrice": "฿{price} each",
+    "checkoutButton": "Proceed to checkout",
+    "discountPlaceholder": "Enter discount code",
+    "discountAriaLabel": "Discount code",
+    "applyCode": "Apply",
+    "discountComingSoon": "Discount codes are coming soon"
+  },
+  "checkout": {
+    "title": "Checkout",
+    "shippingAddress": "Shipping address",
+    "noAddress": "You don't have a shipping address yet. Please add one below to continue.",
+    "editCart": "← Edit cart",
+    "creatingOrder": "Placing order...",
+    "confirmOrder": "Confirm order"
+  },
+  "address": {
+    "recipientName": "Recipient name",
+    "phone": "Phone number",
+    "addressLine1": "Address (house no., road, soi)",
+    "addressLine2": "Additional address (optional)",
+    "subdistrict": "Subdistrict",
+    "district": "District",
+    "province": "Province",
+    "postalCode": "Postal code",
+    "setDefault": "Set as default address",
+    "save": "Save address"
+  },
+  "confirmation": {
+    "orderTitle": "Order {orderNumber}",
+    "pleasePayTitle": "Please make payment",
+    "slipRejected": "Your previous slip was rejected: {reason} — please attach a new one",
+    "transferInstructions": "Transfer the amount below to this account, then attach a payment slip",
+    "pendingVerificationTitle": "Awaiting verification",
+    "pendingVerificationDesc": "Our team has received your slip and is verifying it within 1 business day",
+    "confirmedTitle": "Order confirmed",
+    "confirmedDesc": "Payment verified. Our team is preparing your order for shipment",
+    "shippedTitle": "Order shipped",
+    "shippedDesc": "Your order is on its way. Please wait to receive it",
+    "completedTitle": "Order completed",
+    "completedDesc": "Thank you for shopping with SnapLab. We hope you enjoy your purchase",
+    "cancelledTitle": "Order cancelled",
+    "cancelledDesc": "This order has been cancelled. Contact our team if you have questions",
+    "itemsTitle": "Order items",
+    "viewOrderHistory": "View order history",
+    "attachSlipLabel": "Attach payment slip",
+    "uploadSlipButton": "Upload slip",
+    "slipUploadSuccess": "Slip uploaded successfully, awaiting verification"
+  },
+  "account": {
+    "title": "My account",
+    "nameLabel": "Name: {name}",
+    "emailLabelValue": "Email: {email}",
+    "roleLabel": "Role: {role}",
+    "roleAdmin": "Admin",
+    "roleCustomer": "Customer",
+    "orderHistory": "Order history",
+    "logout": "Sign out",
+    "addressesTitle": "My shipping addresses",
+    "backToAccount": "Back to my account",
+    "noAddresses": "No shipping addresses yet",
+    "orderHistoryTitle": "Order history",
+    "noOrders": "No orders yet"
+  },
+  "auth": {
+    "memberBadge": "SNAPLAB MEMBER",
+    "heroTitle": "Join for a better shopping experience",
+    "benefit1": "View your order history anytime",
+    "benefit2": "Save shipping addresses for faster checkout",
+    "benefit3": "Check out faster next time",
+    "loginTab": "Sign in",
+    "registerTab": "Create account",
+    "login": "Sign in",
+    "register": "Create account",
+    "emailLabel": "Email",
+    "passwordLabel": "Password",
+    "fullNameLabel": "Full name",
+    "fullNamePlaceholder": "e.g. John Smith",
+    "phoneLabel": "Phone number (optional)",
+    "passwordPlaceholder": "At least 8 characters",
+    "pdpaConsent": "I accept the terms of service and consent to SnapLab collecting and using my personal data under the PDPA policy",
+    "loggingIn": "Signing in...",
+    "registering": "Creating account..."
+  },
+  "footer": {
+    "shoppingTitle": "Shop",
+    "customerServiceTitle": "Customer service",
+    "aboutTitle": "About SnapLab",
+    "linkMirrorless": "Mirrorless cameras",
+    "linkLenses": "Lenses (all mounts)",
+    "linkUsed": "Used gear",
+    "linkAllProducts": "All products",
+    "linkTrackOrder": "Track your order",
+    "linkContact": "Contact us",
+    "linkRepairCenter": "Camera repair center",
+    "linkOurStory": "Our story",
+    "linkBranches": "Branches & hours",
+    "linkCareers": "Careers",
+    "linkPrivacy": "Privacy policy",
+    "description": "Full-service camera store selling authentic cameras, lenses, and photography gear with Thailand warranty and expert after-sales support",
+    "registrationNumber": "E-Commerce registration no. 0105566000000",
+    "copyright": "© {year} SnapLab Camera Co., Ltd. All rights reserved.",
+    "paymentNote": "Pay by bank transfer or PromptPay, with payment slip verification"
+  },
+  "tradeIn": {
+    "intro": "Have an old camera, lens, or photography gear you no longer use? The SnapLab team can appraise it and trade it in for a discount on a new item.",
+    "bullet1": "Appraised by expert technicians in-store",
+    "bullet2": "We accept cameras, lenses, and accessories of any brand",
+    "bullet3": "Use the trade-in value as an instant discount on a new item",
+    "note": "This service doesn't yet support online appraisal — contact our team or visit a branch to get appraised",
+    "shopNewButton": "Shop new products"
+  },
+  "orderStatus": {
+    "pendingPayment": "Awaiting payment",
+    "pendingVerification": "Awaiting slip verification",
+    "confirmed": "Order confirmed",
+    "rejected": "Slip rejected",
+    "shipped": "Shipped",
+    "completed": "Completed",
+    "cancelled": "Cancelled"
+  }
+}
