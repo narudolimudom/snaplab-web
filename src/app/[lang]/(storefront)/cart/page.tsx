@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
 import { requireUserAccessToken } from '@/lib/dal';
 import { getCart } from '@/lib/cart';
 import { getPublicUploadUrl } from '@/lib/catalog';
@@ -9,6 +10,10 @@ import { updateCartItemAction, removeCartItemAction } from '@/app/actions/cart';
 import { DiscountCodeField } from '@/components/storefront/discount-code-field';
 import { getDictionary } from '@/lib/dictionaries';
 import { isLocale } from '@/lib/i18n-config';
+
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+};
 
 export default async function CartPage({
   params,

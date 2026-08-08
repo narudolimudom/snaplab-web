@@ -17,20 +17,10 @@ function getPreferredLocale(request: NextRequest): Locale {
 }
 
 // Optimistic check only (cookie presence). Real verification happens in the
-// DAL (src/lib/dal.ts) via requireUser()/requireAdmin() close to the data.
+// DAL (src/lib/dal.ts) via requireUser() close to the data.
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const hasSession = request.cookies.has(ACCESS_TOKEN_COOKIE);
-
-  // /admin is not localized and keeps its original auth-gate behavior untouched.
-  if (pathname.startsWith('/admin')) {
-    if (pathname !== '/admin/login' && !hasSession) {
-      const url = new URL('/admin/login', request.url);
-      url.searchParams.set('redirectTo', pathname);
-      return NextResponse.redirect(url);
-    }
-    return NextResponse.next();
-  }
 
   const pathnameLocale = locales.find(
     (locale) => pathname === `/${locale}` || pathname.startsWith(`/${locale}/`),

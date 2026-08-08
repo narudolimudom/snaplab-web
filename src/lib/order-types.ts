@@ -30,6 +30,18 @@ export interface OrderItem {
   lineTotal: string;
 }
 
+export interface AssignedSerialUnit {
+  id: string;
+  serialNumber: string;
+  status: 'in_stock' | 'sold';
+  soldAt: string | null;
+}
+
+export interface AdminOrderItem extends OrderItem {
+  productVariant: { id: string; tracksSerialNumbers: boolean } | null;
+  serialUnits: AssignedSerialUnit[];
+}
+
 export interface OrderSummary {
   id: string;
   orderNumber: string;
@@ -57,5 +69,10 @@ export interface CustomerPaymentSlip {
 
 export interface OrderDetail extends OrderSummary {
   items: OrderItem[];
+  paymentSlips: CustomerPaymentSlip[];
+}
+
+export interface AdminOrderDetail extends OrderSummary {
+  items: AdminOrderItem[];
   paymentSlips: CustomerPaymentSlip[];
 }

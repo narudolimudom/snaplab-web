@@ -1,5 +1,6 @@
 import { redirect, notFound } from 'next/navigation';
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { requireUserAccessToken } from '@/lib/dal';
 import { getCart } from '@/lib/cart';
 import { getAddresses } from '@/lib/addresses';
@@ -8,6 +9,10 @@ import { AddressForm } from '@/components/storefront/address-form';
 import { OrderForm } from '@/components/storefront/order-form';
 import { getDictionary } from '@/lib/dictionaries';
 import { isLocale } from '@/lib/i18n-config';
+
+export const metadata: Metadata = {
+  robots: { index: false, follow: false },
+};
 
 export default async function CheckoutPage({
   params,

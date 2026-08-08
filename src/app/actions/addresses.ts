@@ -72,9 +72,62 @@ export async function createAddressAction(
   return undefined;
 }
 
+export async function updateAddressAction(
+  id: string,
+  _state: AddressFormState,
+  formData: FormData,
+): Promise<AddressFormState> {
+  const accessToken = await requireUserAccessToken();
+
+  const validated = AddressSchema.safeParse({
+    recipientName: formData.get('recipientName'),
+    phone: formData.get('phone'),
+    addressLine1: formData.get('addressLine1'),
+    addressLine2: formData.get('addressLine2') || undefined,
+    subdistrict: formData.get('subdistrict'),
+    district: formData.get('district'),
+    province: formData.get('province'),
+    postalCode: formData.get('postalCode'),
+  });
+  if (!validated.success) {
+    return { errors: z.flattenError(validated.error).fieldErrors };
+  }
+
+  const isDefault = formData.get('isDefault') === 'on';
+
+  try {
+    await apiFetch(`/addresses/${id}`, {
+      method: 'PATCH',
+      accessToken,
+      body: JSON.stringify({ ...validated.data, isDefault }),
+    });
+  } catch (err) {
+    return {
+      message: err instanceof ApiError ? err.message : 'บันทึกที่อยู่ไม่สำเร็จ',
+    };
+  }
+
+  const locale = await getLocale();
+  revalidatePath(`/${locale}/checkout`);
+  revalidatePath(`/${locale}/account/addresses`);
+  return undefined;
+}
+
 export async function deleteAddressAction(id: string) {
   const accessToken = await requireUserAccessToken();
   await apiFetch(`/addresses/${id}`, { method: 'DELETE', accessToken });
+  const locale = await getLocale();
+  revalidatePath(`/${locale}/checkout`);
+  revalidatePath(`/${locale}/account/addresses`);
+}
+
+export async function setDefaultAddressAction(id: string) {
+  const accessToken = await requireUserAccessToken();
+  await apiFetch(`/addresses/${id}`, {
+    method: 'PATCH',
+    accessToken,
+    body: JSON.stringify({ isDefault: true }),
+  });
   const locale = await getLocale();
   revalidatePath(`/${locale}/checkout`);
   revalidatePath(`/${locale}/account/addresses`);

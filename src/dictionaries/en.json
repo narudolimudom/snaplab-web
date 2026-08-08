@@ -13,6 +13,9 @@
     "increase": "Increase quantity",
     "remove": "Remove",
     "delete": "Delete",
+    "edit": "Edit",
+    "cancel": "Cancel",
+    "save": "Save",
     "saving": "Saving...",
     "uploading": "Uploading...",
     "continueShopping": "Continue shopping",
@@ -170,7 +173,17 @@
     "backToAccount": "Back to my account",
     "noAddresses": "No shipping addresses yet",
     "orderHistoryTitle": "Order history",
-    "noOrders": "No orders yet"
+    "noOrders": "No orders yet",
+    "myAddresses": "My shipping addresses",
+    "orderHistorySubtitle": "View your order status and history",
+    "addressesSubtitle": "Manage your shipping addresses",
+    "phoneLabelValue": "Phone: {phone}",
+    "fullNameLabel": "Full name",
+    "phoneLabel": "Phone number (optional)",
+    "changePassword": "Change password",
+    "currentPasswordLabel": "Current password",
+    "newPasswordLabel": "New password",
+    "confirmPasswordLabel": "Confirm new password"
   },
   "auth": {
     "memberBadge": "SNAPLAB MEMBER",
@@ -228,5 +241,26 @@
     "shipped": "Shipped",
     "completed": "Completed",
     "cancelled": "Cancelled"
+  },
+  "validation": {
+    "requiredField": "This field is required",
+    "requiredEmail": "Please enter your email",
+    "invalidEmail": "Please enter a valid email",
+    "requiredPassword": "Please enter your password",
+    "passwordTooShort": "Password must be at least 8 characters",
+    "passwordMismatch": "New passwords do not match",
+    "requiredFullName": "Please enter your full name",
+    "fullNameTooShort": "Full name must be at least 2 characters",
+    "requiredPdpaConsent": "Please accept the terms of service",
+    "invalidPostalCode": "Postal code must be 5 digits"
+  },
+  "seo": {
+    "siteName": "SnapLab Camera Store",
+    "homeTitle": "SnapLab Camera Store | Authentic Cameras, Lenses & Photography Gear",
+    "homeDescription": "Full-service camera store selling authentic cameras, lenses, and photography gear with 2-year Thailand warranty. Free nationwide shipping on orders over ฿2,000.",
+    "productsTitle": "All Products",
+    "productsDescription": "Shop authentic cameras, lenses, and photography gear from every brand, with Thailand warranty and free nationwide shipping.",
+    "categoryDescription": "Shop {category} of great quality, authentic, with Thailand warranty. Free nationwide shipping.",
+    "productDescriptionFallback": "Buy {name} authentic, with 2-year Thailand warranty, at SnapLab. Free nationwide shipping."
   }
 }

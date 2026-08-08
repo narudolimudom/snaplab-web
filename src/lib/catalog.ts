@@ -47,21 +47,3 @@ export function getProducts(query: ProductQuery = {}) {
 export function getProductBySlug(slug: string) {
   return apiFetch<ProductDetail>(`/products/${encodeURIComponent(slug)}`);
 }
-
-export interface AdminProductQuery extends ProductQuery {
-  status?: 'draft' | 'published' | 'archived';
-}
-
-export function getAdminProducts(
-  query: AdminProductQuery,
-  accessToken: string,
-) {
-  return apiFetch<PaginatedResult<Product>>(
-    `/admin/products${toQueryString(query)}`,
-    { accessToken },
-  );
-}
-
-export function getAdminProductById(id: string, accessToken: string) {
-  return apiFetch<ProductDetail>(`/admin/products/${id}`, { accessToken });
-}

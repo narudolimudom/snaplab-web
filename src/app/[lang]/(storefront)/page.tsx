@@ -1,9 +1,38 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import type { Metadata } from 'next';
 import { getCategories, getProducts } from '@/lib/catalog';
 import { ProductCard } from '@/components/storefront/product-card';
 import { getDictionary } from '@/lib/dictionaries';
-import { isLocale } from '@/lib/i18n-config';
+import { isLocale, locales } from '@/lib/i18n-config';
+import { SITE_URL } from '@/lib/site-config';
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  if (!isLocale(lang)) return {};
+  const dict = await getDictionary(lang);
+
+  return {
+    title: dict.seo.homeTitle,
+    description: dict.seo.homeDescription,
+    alternates: {
+      canonical: `${SITE_URL}/${lang}`,
+      languages: Object.fromEntries(locales.map((l) => [l, `${SITE_URL}/${l}`])),
+    },
+    openGraph: {
+      title: dict.seo.homeTitle,
+      description: dict.seo.homeDescription,
+      url: `${SITE_URL}/${lang}`,
+      siteName: dict.seo.siteName,
+      locale: lang === 'th' ? 'th_TH' : 'en_US',
+      type: 'website',
+    },
+  };
+}
 
 export default async function Home({
   params,

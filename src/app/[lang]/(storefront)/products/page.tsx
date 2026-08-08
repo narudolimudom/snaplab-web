@@ -1,23 +1,77 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getCategories, getProducts } from '@/lib/catalog';
+import type { Metadata } from 'next';
+import { getCategories, getCategoryBySlug, getProducts } from '@/lib/catalog';
 import { ProductCard } from '@/components/storefront/product-card';
+import { JsonLd } from '@/components/seo/json-ld';
 import { getDictionary } from '@/lib/dictionaries';
-import { isLocale } from '@/lib/i18n-config';
+import { isLocale, locales } from '@/lib/i18n-config';
+import { SITE_URL } from '@/lib/site-config';
+
+type ProductsSearchParams = {
+  category?: string;
+  search?: string;
+  page?: string;
+  minPrice?: string;
+  maxPrice?: string;
+  sort?: string;
+};
+
+export async function generateMetadata({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ lang: string }>;
+  searchParams: Promise<ProductsSearchParams>;
+}): Promise<Metadata> {
+  const { lang } = await params;
+  if (!isLocale(lang)) return {};
+  const dict = await getDictionary(lang);
+  const { category } = await searchParams;
+
+  const categoryData = category ? await getCategoryBySlug(category).catch(() => null) : null;
+
+  const title = categoryData
+    ? `${categoryData.name} | ${dict.seo.siteName}`
+    : `${dict.seo.productsTitle} | ${dict.seo.siteName}`;
+  const description = categoryData
+    ? dict.seo.categoryDescription.replace('{category}', categoryData.name)
+    : dict.seo.productsDescription;
+  const canonicalPath = category
+    ? `/${lang}/products?category=${encodeURIComponent(category)}`
+    : `/${lang}/products`;
+
+  return {
+    title,
+    description,
+    alternates: {
+      canonical: `${SITE_URL}${canonicalPath}`,
+      languages: Object.fromEntries(
+        locales.map((l) => [
+          l,
+          category
+            ? `${SITE_URL}/${l}/products?category=${encodeURIComponent(category)}`
+            : `${SITE_URL}/${l}/products`,
+        ]),
+      ),
+    },
+    openGraph: {
+      title,
+      description,
+      url: `${SITE_URL}${canonicalPath}`,
+      siteName: dict.seo.siteName,
+      locale: lang === 'th' ? 'th_TH' : 'en_US',
+      type: 'website',
+    },
+  };
+}
 
 export default async function ProductsPage({
   params,
   searchParams,
 }: {
   params: Promise<{ lang: string }>;
-  searchParams: Promise<{
-    category?: string;
-    search?: string;
-    page?: string;
-    minPrice?: string;
-    maxPrice?: string;
-    sort?: string;
-  }>;
+  searchParams: Promise<ProductsSearchParams>;
 }) {
   const { lang } = await params;
   if (!isLocale(lang)) notFound();
@@ -65,8 +119,25 @@ export default async function ProductsPage({
     return `/${lang}/products?${qs.toString()}`;
   }
 
+  const breadcrumbSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      { '@type': 'ListItem', position: 1, name: dict.common.home, item: `${SITE_URL}/${lang}` },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: activeCategory?.name ?? dict.products.allProducts,
+        item: activeCategory
+          ? `${SITE_URL}/${lang}/products?category=${activeCategory.slug}`
+          : `${SITE_URL}/${lang}/products`,
+      },
+    ],
+  };
+
   return (
     <main className="max-w-[1280px] mx-auto p-4 flex flex-col gap-4">
+      <JsonLd data={breadcrumbSchema} />
       <div className="flex items-center gap-2 text-[12.8px] font-semibold text-text-faint py-2">
         <Link href={`/${lang}`}>{dict.common.home}</Link>
         <span>/</span>

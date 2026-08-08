@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache';
 import { apiFetch, ApiError } from '@/lib/api';
-import { requireAdminAccessToken, requireUserAccessToken } from '@/lib/dal';
+import { requireUserAccessToken } from '@/lib/dal';
 import { getLocale } from '@/lib/get-locale';
 
 export async function uploadSlipAction(orderId: string, formData: FormData) {
@@ -32,26 +32,4 @@ export async function uploadSlipAction(orderId: string, formData: FormData) {
   revalidatePath(`/${locale}/orders/${orderId}/confirmation`);
   revalidatePath(`/${locale}/account/orders`);
   return { success: true };
-}
-
-export async function approveSlipAction(slipId: string) {
-  const accessToken = await requireAdminAccessToken();
-  await apiFetch(`/admin/payment-slips/${slipId}/approve`, {
-    method: 'PATCH',
-    accessToken,
-  });
-  revalidatePath('/admin/payment-slips');
-}
-
-export async function rejectSlipAction(slipId: string, formData: FormData) {
-  const accessToken = await requireAdminAccessToken();
-  const reason = String(formData.get('reason') ?? '').trim();
-  if (!reason) return;
-
-  await apiFetch(`/admin/payment-slips/${slipId}/reject`, {
-    method: 'PATCH',
-    accessToken,
-    body: JSON.stringify({ reason }),
-  });
-  revalidatePath('/admin/payment-slips');
 }

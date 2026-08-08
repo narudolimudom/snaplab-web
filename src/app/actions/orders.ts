@@ -3,7 +3,7 @@
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache';
 import { apiFetch, ApiError } from '@/lib/api';
-import { requireAdminAccessToken, requireUserAccessToken } from '@/lib/dal';
+import { requireUserAccessToken } from '@/lib/dal';
 import { getLocale } from '@/lib/get-locale';
 
 export type CreateOrderState = { message?: string } | undefined;
@@ -35,18 +35,4 @@ export async function createOrderAction(
   revalidatePath('/', 'layout');
   const locale = await getLocale();
   redirect(`/${locale}/orders/${order.id}/confirmation`);
-}
-
-export async function updateOrderStatusAction(
-  orderId: string,
-  status: 'shipped' | 'completed',
-) {
-  const accessToken = await requireAdminAccessToken();
-  await apiFetch(`/admin/orders/${orderId}/status`, {
-    method: 'PATCH',
-    accessToken,
-    body: JSON.stringify({ status }),
-  });
-  revalidatePath('/admin/orders');
-  revalidatePath(`/admin/orders/${orderId}`);
 }

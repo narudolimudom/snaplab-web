@@ -1,9 +1,11 @@
 'use server';
 
 import { redirect } from 'next/navigation';
+import { revalidatePath } from 'next/cache';
 import * as z from 'zod';
 import { apiFetch, ApiError } from '@/lib/api';
 import { setSessionCookies, clearSessionCookies, getSessionCookies } from '@/lib/session';
+import { requireUserAccessToken } from '@/lib/dal';
 import { getLocale } from '@/lib/get-locale';
 import type { AuthTokens } from '@/lib/types';
 
@@ -96,6 +98,109 @@ export async function registerAction(
   redirect(`/${locale}/account`);
 }
 
+const UpdateProfileSchema = z.object({
+  fullName: z.string().min(2, { error: 'กรุณากรอกชื่อ-นามสกุล' }),
+  phone: z.string().optional(),
+});
+
+export type UpdateProfileState =
+  | {
+      errors?: { fullName?: string[] };
+      message?: string;
+      success?: boolean;
+    }
+  | undefined;
+
+export async function updateProfileAction(
+  _state: UpdateProfileState,
+  formData: FormData,
+): Promise<UpdateProfileState> {
+  const accessToken = await requireUserAccessToken();
+
+  const validated = UpdateProfileSchema.safeParse({
+    fullName: formData.get('fullName'),
+    phone: formData.get('phone') || undefined,
+  });
+  if (!validated.success) {
+    return { errors: z.flattenError(validated.error).fieldErrors };
+  }
+
+  try {
+    await apiFetch('/auth/me', {
+      method: 'PATCH',
+      accessToken,
+      body: JSON.stringify(validated.data),
+    });
+  } catch (err) {
+    return {
+      message: err instanceof ApiError ? err.message : 'บันทึกข้อมูลไม่สำเร็จ',
+    };
+  }
+
+  const locale = await getLocale();
+  revalidatePath(`/${locale}/account`);
+  return { success: true };
+}
+
+const ChangePasswordSchema = z
+  .object({
+    currentPassword: z.string().min(1, { error: 'กรุณากรอกรหัสผ่านเดิม' }),
+    newPassword: z
+      .string()
+      .min(8, { error: 'รหัสผ่านใหม่ต้องมีอย่างน้อย 8 ตัวอักษร' }),
+    confirmPassword: z.string().min(1, { error: 'กรุณายืนยันรหัสผ่านใหม่' }),
+  })
+  .refine((data) => data.newPassword === data.confirmPassword, {
+    error: 'รหัสผ่านใหม่ไม่ตรงกัน',
+    path: ['confirmPassword'],
+  });
+
+export type ChangePasswordState =
+  | {
+      errors?: {
+        currentPassword?: string[];
+        newPassword?: string[];
+        confirmPassword?: string[];
+      };
+      message?: string;
+    }
+  | undefined;
+
+export async function changePasswordAction(
+  _state: ChangePasswordState,
+  formData: FormData,
+): Promise<ChangePasswordState> {
+  const accessToken = await requireUserAccessToken();
+
+  const validated = ChangePasswordSchema.safeParse({
+    currentPassword: formData.get('currentPassword'),
+    newPassword: formData.get('newPassword'),
+    confirmPassword: formData.get('confirmPassword'),
+  });
+  if (!validated.success) {
+    return { errors: z.flattenError(validated.error).fieldErrors };
+  }
+
+  try {
+    await apiFetch('/auth/change-password', {
+      method: 'PATCH',
+      accessToken,
+      body: JSON.stringify({
+        currentPassword: validated.data.currentPassword,
+        newPassword: validated.data.newPassword,
+      }),
+    });
+  } catch (err) {
+    return {
+      message: err instanceof ApiError ? err.message : 'เปลี่ยนรหัสผ่านไม่สำเร็จ',
+    };
+  }
+
+  await clearSessionCookies();
+  const locale = await getLocale();
+  redirect(`/${locale}/login`);
+}
+
 async function revokeSession() {
   const { refreshToken } = await getSessionCookies();
   if (refreshToken) {
@@ -115,9 +220,4 @@ export async function logoutAction() {
   await revokeSession();
   const locale = await getLocale();
   redirect(`/${locale}/login`);
-}
-
-export async function adminLogoutAction() {
-  await revokeSession();
-  redirect('/admin/login');
 }

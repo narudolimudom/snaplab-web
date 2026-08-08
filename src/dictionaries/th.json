@@ -13,6 +13,9 @@
     "increase": "เพิ่มจำนวน",
     "remove": "ลบออก",
     "delete": "ลบ",
+    "edit": "แก้ไข",
+    "cancel": "ยกเลิก",
+    "save": "บันทึก",
     "saving": "กำลังบันทึก...",
     "uploading": "กำลังอัปโหลด...",
     "continueShopping": "เลือกซื้อสินค้าต่อ",
@@ -170,7 +173,17 @@
     "backToAccount": "กลับบัญชีของฉัน",
     "noAddresses": "ยังไม่มีที่อยู่จัดส่ง",
     "orderHistoryTitle": "ประวัติคำสั่งซื้อ",
-    "noOrders": "ยังไม่มีคำสั่งซื้อ"
+    "noOrders": "ยังไม่มีคำสั่งซื้อ",
+    "myAddresses": "ที่อยู่จัดส่งของฉัน",
+    "orderHistorySubtitle": "ดูสถานะและประวัติคำสั่งซื้อทั้งหมด",
+    "addressesSubtitle": "จัดการที่อยู่จัดส่งของคุณ",
+    "phoneLabelValue": "เบอร์โทร: {phone}",
+    "fullNameLabel": "ชื่อ-นามสกุล",
+    "phoneLabel": "เบอร์โทรศัพท์ (ไม่บังคับ)",
+    "changePassword": "เปลี่ยนรหัสผ่าน",
+    "currentPasswordLabel": "รหัสผ่านเดิม",
+    "newPasswordLabel": "รหัสผ่านใหม่",
+    "confirmPasswordLabel": "ยืนยันรหัสผ่านใหม่"
   },
   "auth": {
     "memberBadge": "SNAPLAB MEMBER",
@@ -228,5 +241,26 @@
     "shipped": "จัดส่งแล้ว",
     "completed": "สำเร็จ",
     "cancelled": "ยกเลิก"
+  },
+  "validation": {
+    "requiredField": "กรุณากรอกข้อมูล",
+    "requiredEmail": "กรุณากรอกอีเมล",
+    "invalidEmail": "กรุณากรอกอีเมลให้ถูกต้อง",
+    "requiredPassword": "กรุณากรอกรหัสผ่าน",
+    "passwordTooShort": "รหัสผ่านต้องมีอย่างน้อย 8 ตัวอักษร",
+    "passwordMismatch": "รหัสผ่านใหม่ไม่ตรงกัน",
+    "requiredFullName": "กรุณากรอกชื่อ-นามสกุล",
+    "fullNameTooShort": "ชื่อ-นามสกุลต้องมีอย่างน้อย 2 ตัวอักษร",
+    "requiredPdpaConsent": "กรุณายอมรับเงื่อนไขการใช้บริการ",
+    "invalidPostalCode": "รหัสไปรษณีย์ต้องเป็นตัวเลข 5 หลัก"
+  },
+  "seo": {
+    "siteName": "SnapLab กล้องออนไลน์",
+    "homeTitle": "SnapLab กล้องออนไลน์ | กล้อง เลนส์ และอุปกรณ์ถ่ายภาพของแท้",
+    "homeDescription": "ร้านกล้องครบวงจร จำหน่ายกล้อง เลนส์ และอุปกรณ์ถ่ายภาพของแท้ ประกันศูนย์ไทย 2 ปี ส่งฟรีทั่วไทยเมื่อสั่งซื้อครบ 2,000 บาท",
+    "productsTitle": "สินค้าทั้งหมด",
+    "productsDescription": "เลือกซื้อกล้อง เลนส์ และอุปกรณ์ถ่ายภาพของแท้ครบทุกแบรนด์ ประกันศูนย์ไทย จัดส่งฟรีทั่วประเทศ",
+    "categoryDescription": "เลือกซื้อ{category}คุณภาพดี ของแท้ ประกันศูนย์ไทย จัดส่งฟรีทั่วประเทศ",
+    "productDescriptionFallback": "ซื้อ {name} ของแท้ ประกันศูนย์ไทย 2 ปี ที่ SnapLab จัดส่งฟรีทั่วประเทศ"
   }
 }

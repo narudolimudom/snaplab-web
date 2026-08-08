@@ -2,8 +2,8 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { requireUserAccessToken } from '@/lib/dal';
 import { getAddresses } from '@/lib/addresses';
-import { deleteAddressAction } from '@/app/actions/addresses';
 import { AddressForm } from '@/components/storefront/address-form';
+import { AddressListItem } from '@/components/storefront/address-list-item';
 import { getDictionary } from '@/lib/dictionaries';
 import { isLocale } from '@/lib/i18n-config';
 
@@ -32,34 +32,7 @@ export default async function AccountAddressesPage({
       ) : (
         <div className="flex flex-col gap-2">
           {addresses.map((addr) => (
-            <div
-              key={addr.id}
-              className="bg-white border border-border-subtle rounded-lg p-4 flex items-start justify-between gap-4"
-            >
-              <div className="text-sm">
-                <p className="font-semibold">
-                  {addr.recipientName} · {addr.phone}
-                  {addr.isDefault && (
-                    <span className="ml-2 text-[12.8px] font-bold text-brand-red">
-                      {dict.common.defaultAddress}
-                    </span>
-                  )}
-                </p>
-                <p className="text-text-muted">
-                  {addr.addressLine1}
-                  {addr.addressLine2 ? ` ${addr.addressLine2}` : ''} ต.{addr.subdistrict}{' '}
-                  อ.{addr.district} จ.{addr.province} {addr.postalCode}
-                </p>
-              </div>
-              <form action={deleteAddressAction.bind(null, addr.id)}>
-                <button
-                  type="submit"
-                  className="text-[12.8px] font-semibold text-text-faint hover:text-brand-red"
-                >
-                  {dict.common.delete}
-                </button>
-              </form>
-            </div>
+            <AddressListItem key={addr.id} addr={addr} dict={dict} />
           ))}
         </div>
       )}

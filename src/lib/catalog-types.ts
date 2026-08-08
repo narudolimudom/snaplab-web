@@ -24,6 +24,7 @@ export interface ProductVariant {
   color: string | null;
   priceOverride: string | null;
   stockQuantity: number;
+  tracksSerialNumbers: boolean;
 }
 
 export interface Product {
@@ -36,10 +37,10 @@ export interface Product {
   status: ProductStatus;
   createdAt: string;
   updatedAt: string;
+  images: ProductImage[];
 }
 
 export interface ProductDetail extends Product {
-  images: ProductImage[];
   variants: ProductVariant[];
   category: Category;
 }
@@ -49,4 +50,41 @@ export interface PaginatedResult<T> {
   total: number;
   page: number;
   limit: number;
+}
+
+export type StockMovementReason =
+  | 'initial'
+  | 'restock'
+  | 'adjustment'
+  | 'order_placed';
+
+export interface StockMovement {
+  id: string;
+  productVariantId: string | null;
+  skuSnapshot: string;
+  reason: StockMovementReason;
+  quantityChange: number;
+  previousQuantity: number;
+  newQuantity: number;
+  note: string | null;
+  orderId: string | null;
+  createdBy: string | null;
+  createdAt: string;
+  createdByUser: { fullName: string } | null;
+}
+
+export type SerialUnitStatus = 'in_stock' | 'sold';
+
+export interface SerialUnit {
+  id: string;
+  productVariantId: string | null;
+  skuSnapshot: string;
+  serialNumber: string;
+  status: SerialUnitStatus;
+  note: string | null;
+  orderItemId: string | null;
+  receivedBy: string | null;
+  receivedAt: string;
+  soldAt: string | null;
+  receivedByUser: { fullName: string } | null;
 }
